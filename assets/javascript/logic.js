@@ -10,21 +10,24 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 var name = "";
-var destination = "";
+var stopStation = "";
 var firstTrain = "00:00";
 var frequency = 1;
+var buttonClicked = "red";
 
 $("#submit-button").on("click", function(event) {
     event.preventDefault();
 
     name = $("#name").val().trim();
-    destination = $("#destination").val().trim();
+    console.log(name);
+    stopStation = $("#stop-station").val().trim();
     firstTrain = $("#start-time").val().trim();
     frequency = $("#frequency").val().trim();
 
     database.ref().push({
+        type: "train",
         name: name,
-        destination: destination,
+        stopStation: stopStation,
         firstTrain: firstTrain,
         frequency: frequency,
         dateAdded: firebase.database.ServerValue.TIMESTAMP,
@@ -33,13 +36,17 @@ $("#submit-button").on("click", function(event) {
     showTransit();
 
     $("#name").val("");
-    $("#destination").val("");
+    $("#sto-station").val("");
     $("#start-time").val("");
     $("#frequency").val("");
 });
 
 function showTransit() {
-    $("tobdy").html("");
+
+    var userSelect = $(this).val();
+    console.log(userSelect);
+
+    $("tbody").html("");
 
     database.ref().on("child_added", function(snapshot) {
 
@@ -59,15 +66,24 @@ function showTransit() {
         var tBody = $("tbody");
         var tRow = $("<tr>");
         var tName = $("<td>").text(sv.name);
-        var tDestination = $("<td>").text(sv.destination);
+        var tstopStation = $("<td>").text(sv.stopStation);
         var tFrequency = $("<td>").text(sv.frequency);
         var tNextTrain = $("<td>").text(moment(nextTrain).format("hh:mm"));
         var tMinutestoNextTrain = $("<td>").text(minutesUntilTrain);
+        var tClose = $('<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>');
+        var newPostKey = firebase.database().ref().child('train').push().key;
+        console.log(newPostKey);
 
-        tRow.append(tName, tDestination, tFrequency, tNextTrain, tMinutestoNextTrain);
-        tBody.append(tRow);
-   
+        if (sv.name === userSelect || userSelect === "all") {
+            tRow.append(tName, tstopStation, tFrequency, tNextTrain, tMinutestoNextTrain, tClose).attr("id", newPostKey);
+            tBody.append(tRow);
+        };
+
+        // function everyMinute() {
+            
+        // }
 })};
 
+$(document).on("click", ".train", showTransit);
 
-showTransit();
+// showTransit();

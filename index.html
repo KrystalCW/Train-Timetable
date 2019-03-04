@@ -6,7 +6,7 @@
 
   <meta charset="UTF-8">
 
-  <title>Train Timetable</title>
+  <title>Max Schedule</title>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
@@ -31,16 +31,25 @@
                     <button type="submit" class="btn btn-primary" id="show-all">Show All Employees</button>
                     <button type="submit" class="btn btn-primary" id="show-recent">Show Most Recent Employee</button>
                 </div> -->
+                <div class="btn group">
+                    <button type="submit" class="btn btn-primary train" value="red-line" id="show-redline">Show Red Line</button>
+                    <button type="submit" class="btn btn-primary train" value="blue-line" id="show-blueline">Show Blue Line</button>
+                    <button type="submit" class="btn btn-primary train" value="yellow-line" id="show-yellowline">Show Yellow Line</button>
+                    <button type="submit" class="btn btn-primary train" value="green-line" id="show-greenline">Show Green Line</button>
+                    <button type="submit" class="btn btn-primary train" value="orange-line" id="show-orangeline">Show Orange Line</button>
+                    <button type="submit" class="btn btn-primary train" value="all" id="show-all">Show All Trains</button>
+                </div>
                 <h5 class="card-header">Current Train Schedule</h5>
                 <div class="card-body">
                     <table style="width:100%">
                         <thead>
                             <tr>
-                                <th>Train Name</th>
-                                <th>Destination</th> 
+                                <th>Train Line</th>
+                                <th>Stop Station</th> 
                                 <th>Frequency (min)</th>
                                 <th>Next Arrival</th>
-                                <th>Minutes Away</th> 
+                                <th>Minutes Away</th>
+                                <th>Delete Train</th> 
                             </tr>
                         </thead>
                         <tbody>
@@ -53,12 +62,18 @@
                     <h5 class="card-header">Add Train</h5>
                     <form>
                         <div class="form-group">
-                            <label for="name">Train Name</label>
-                            <textarea class="form-control" id="name" rows="1"></textarea>
+                            <label for="name">Select line: </label>
+                            <select class="form-control" id="name">
+                                <option value="red-line">Red line</option>
+                                <option value="blue-line">Blue line</option>
+                                <option value="yellow-line">Yellow line</option>
+                                <option value="green-line">Green line</option>
+                                <option value="orange-line">Orange line</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="destination">Destination</label>
-                            <textarea class="form-control" id="destination" rows="1"></textarea>
+                            <label for="stop-station">Stop Station</label>
+                            <textarea class="form-control" id="stop-station" rows="1"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="start-time">First Train Time (HH:mm - military time)</label>
