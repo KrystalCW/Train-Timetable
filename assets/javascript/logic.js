@@ -15,6 +15,20 @@ var firstTrain = "00:00";
 var frequency = 1;
 var buttonClicked = "red";
 
+runTime();
+// $(document).ready(setInterval);
+
+setInterval(runTime, 60000);
+
+function runTime() {
+    var currentTime = new Date ( );
+    var currentHours = currentTime.getHours ( );
+    var currentMinutes = currentTime.getMinutes ( );
+    currentMinutes = ( currentMinutes < 10 ? "0" : "" ) + currentMinutes;
+    var currentTimeString = currentHours + ":" + currentMinutes;
+    document.getElementById("clock").firstChild.nodeValue = currentTimeString;
+};
+
 $("#submit-button").on("click", function(event) {
     event.preventDefault();
 
@@ -32,6 +46,7 @@ $("#submit-button").on("click", function(event) {
         frequency: frequency,
         dateAdded: firebase.database.ServerValue.TIMESTAMP,
     })
+    // console.log(snapshot.key);
 
     showTransit();
 
@@ -70,18 +85,14 @@ function showTransit() {
         var tFrequency = $("<td>").text(sv.frequency);
         var tNextTrain = $("<td>").text(moment(nextTrain).format("hh:mm"));
         var tMinutestoNextTrain = $("<td>").text(minutesUntilTrain);
-        var tClose = $('<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>');
+        // var tClose = $('<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>');
         var newPostKey = firebase.database().ref().child('train').push().key;
         console.log(newPostKey);
 
         if (sv.name === userSelect || userSelect === "all") {
-            tRow.append(tName, tstopStation, tFrequency, tNextTrain, tMinutestoNextTrain, tClose).attr("id", newPostKey);
+            tRow.append(tName, tstopStation, tFrequency, tNextTrain, tMinutestoNextTrain).attr("id", newPostKey);
             tBody.append(tRow);
         };
-
-        // function everyMinute() {
-            
-        // }
 })};
 
 $(document).on("click", ".train", showTransit);

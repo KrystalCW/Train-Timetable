@@ -1,14 +1,58 @@
 body {
     max-width: 960px;
     margin: 0 auto;
+    background-image: url(../images/portland-bridge.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.jumbotron {
+    background-color: #e6eaf6;
+    opacity: 0.85;
+    color: #f47530;
+    margin-top: 10px;
 }
 
 .card {
     margin: 10px;
+    background-color: #e6eaf6;
+    color: #707fc0;
+    /* opacity: 0.9; */
+}
+
+#show-redline {
+    background-color: #f7404d;
+    opacity: 1.5;
+}
+
+#show-blueline {
+    background-color: #084fe7;
+}
+
+#show-yellowline {
+    background-color: #f3e648
+}
+
+#show-greenline {
+    background-color: #318525;
+}
+
+#show-orangeline {
+    background-color: #f47530;
+}
+
+#show-all {
+    background-color: #707fc0;
 }
 
 .form-group {
     margin: 10px;
+}
+
+#name, #stop-station, #start-time, #frequency {
+    opacity: 1.0;
 }
 
 #submit-button {
@@ -24,8 +68,18 @@ body {
     font-size: 1rem;
     line-height: 1.5;
     color: #495057;
-    background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #ced4da;
     border-radius: .25rem;
+}
+
+#color-palette {
+    color: #f3e648;
+    color: #cfddde;
+    color: #f47530;
+    color: #707fc0;
+    color: #318525;
+    color: #f7404d;
+    color: #084fe7;
+    color: #fff9d0;
 }
