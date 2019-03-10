@@ -48,10 +48,8 @@ $("#submit-button").on("click", function(event) {
     })
     // console.log(snapshot.key);
 
-    showTransit();
-
     $("#name").val("");
-    $("#sto-station").val("");
+    $("#stop-station").val("");
     $("#start-time").val("");
     $("#frequency").val("");
 });
